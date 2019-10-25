@@ -129,6 +129,11 @@ http {
         add_header Strict-Transport-Security "max-age=31536000{{if .HSTSIncludeSubDomains}}; includeSubDomains{{end}}{{if .HSTSPreload}}; preload{{end}}";
       {{end}}
 
+      location /assets/inject {
+        default_type application/json;
+        return 200 '<%= ENV["INJECT"] %>';
+    	}
+
       {{if ne .LocationInclude ""}}
         include {{.LocationInclude}};
       {{end}}
